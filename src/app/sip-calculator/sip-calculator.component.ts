@@ -8,7 +8,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class SipCalculatorComponent {
   sipForm: FormGroup;
-  result: number | null = null;
+  estimatedFutureValue: number | null = null;
+  totalInvestment: number | null = null;
+  totalProfit: number | null = null;
   selectedTab: string = 'lumpsum';
 
   constructor(private fb: FormBuilder) {
@@ -32,21 +34,29 @@ export class SipCalculatorComponent {
 
     if (this.selectedTab === 'lumpsum') {
       const initialInvestment = this.sipForm.value.initialInvestment;
-      this.result = initialInvestment * Math.pow(1 + expectedReturnRate, investmentPeriod);
+      this.totalInvestment = initialInvestment;
+      this.estimatedFutureValue = initialInvestment * Math.pow(1 + expectedReturnRate, investmentPeriod);
     } else {
       const monthlyInvestment = this.sipForm.value.monthlyInvestment;
       let totalInvestment = 0;
       let monthlyInvestmentWithStepUp = monthlyInvestment;
+      let futureValue = 0;
 
       for (let year = 1; year <= investmentPeriod; year++) {
         for (let month = 1; month <= 12; month++) {
+          futureValue += monthlyInvestmentWithStepUp;
+          futureValue *= (1 + expectedReturnRate / 12);
           totalInvestment += monthlyInvestmentWithStepUp;
-          totalInvestment *= (1 + expectedReturnRate / 12);
         }
         monthlyInvestmentWithStepUp += monthlyInvestmentWithStepUp * stepUpPercentage;
       }
 
-      this.result = totalInvestment;
+      this.totalInvestment = totalInvestment;
+      this.estimatedFutureValue = futureValue;
+    }
+
+    if (this.estimatedFutureValue !== null && this.totalInvestment !== null) {
+      this.totalProfit = this.estimatedFutureValue - this.totalInvestment;
     }
   }
 }

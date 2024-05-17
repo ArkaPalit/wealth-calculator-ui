@@ -7,6 +7,7 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
+  //   margin-top: 25px;
 }
 
 .container {
@@ -21,19 +22,21 @@ body {
 
 .tabs {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  align-items: center;
   margin-bottom: 20px;
 }
 
 .tabs button {
-  background: #007bff;
+  background: #416891;
   border: none;
   color: white;
   padding: 10px 20px;
   cursor: pointer;
-  font-size: 16px;
-  border-radius: 5px;
+  font-size: 14px;
+  border-radius: 50px;
   transition: background 0.3s;
+  margin-right: 10px; /* Reduce gap between buttons */
 }
 
 .tabs button.active,
@@ -105,3 +108,14 @@ body {
     padding: 8px 16px;
   }
 }
+
+.copyright {
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+    font-weight: bold;
+}
+.copyright a {
+    color: rgb(94, 94, 218);
+}
+  

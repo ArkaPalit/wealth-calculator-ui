@@ -1,5 +1,4 @@
-<app-nav-bar></app-nav-bar>
-<br /><br>
+<app-nav-bar></app-nav-bar> <br /><br />
 <div class="container">
   <div class="tabs">
     <button
@@ -69,7 +68,26 @@
     <button type="submit" class="btn btn-primary">Calculate</button>
   </form>
 
-  <div *ngIf="result !== null" class="result">
-    <h3>Estimated Future Value: {{ result | currency : "INR" }}</h3>
+  <div
+    *ngIf="
+      estimatedFutureValue !== null &&
+      totalInvestment !== null &&
+      totalProfit !== null
+    "
+    class="result"
+  >
+    <h3>
+      Estimated Future Value: {{ estimatedFutureValue | currency : "INR" }}
+    </h3>
+    <h4>Total Investment: {{ totalInvestment | currency : "INR" }}</h4>
+    <h4>Total Profit: {{ totalProfit | currency : "INR" }}</h4>
   </div>
+</div>
+
+<div class="copyright">
+  Developed by&nbsp;<a
+    href="https://www.linkedin.com/in/arkapalit/"
+    target="_blank"
+    >@ArkaPalit</a
+  >
 </div>
