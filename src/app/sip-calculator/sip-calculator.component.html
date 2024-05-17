@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="tabs">
+      <button [class.active]="selectedTab === 'lumpsum'" (click)="selectTab('lumpsum')">Lumpsum</button>
+      <button [class.active]="selectedTab === 'sip'" (click)="selectTab('sip')">SIP</button>
+    </div>
+  
+    <form [formGroup]="sipForm" (ngSubmit)="calculateSIP()">
+      <div *ngIf="selectedTab === 'lumpsum'" class="form-group">
+        <label for="initialInvestment">Initial Investment Amount</label>
+        <input id="initialInvestment" type="number" formControlName="initialInvestment" class="form-control" required>
+      </div>
+  
+      <div *ngIf="selectedTab === 'sip'" class="form-group">
+        <label for="monthlyInvestment">Monthly Investment Amount</label>
+        <input id="monthlyInvestment" type="number" formControlName="monthlyInvestment" class="form-control" required>
+      </div>
+  
+      <div class="form-group">
+        <label for="stepUpPercentage">Annual Step-up Percentage</label>
+        <input id="stepUpPercentage" type="number" formControlName="stepUpPercentage" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="investmentPeriod">Investment Period (Years)</label>
+        <input id="investmentPeriod" type="number" formControlName="investmentPeriod" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="expectedReturnRate">Expected Rate of Return (%)</label>
+        <input id="expectedReturnRate" type="number" formControlName="expectedReturnRate" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Calculate</button>
+    </form>
+  
+    <div *ngIf="result !== null" class="result">
+      <h3>Estimated Future Value: {{ result | currency:'INR' }}</h3>
+    </div>
+  </div>
+  
